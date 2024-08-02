@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, FlatList, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, FlatList, Alert} from 'react-native';
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -72,11 +72,10 @@ export default function App() {
   const renderItem = ({ item, index }) => (
     <View style={styles.todoItem}>
       <Text style={item.completed ? styles.completed : styles.todoText}>{item.text}</Text>
-      {item.completed && item.timeend && (
-        <Text style={styles.completedTime}>Completado a las {item.timeend.getHours()}hs {item.timeend.getMinutes()}mins {item.timeend.getSeconds()}segs del {item.timeend.getDate()}/{item.timeend.getMonth() + 1}</Text>
-      )}
-      {!item.completed && (
+      {!item.completed ? (
         <Button title="Completar" onPress={() => mostrarCompletos(index)} />
+      ) : (
+        <Text style={styles.completedTime}>Completado a las {item.timeend.getHours()}hs {item.timeend.getMinutes()}mins {item.timeend.getSeconds()}segs del {item.timeend.getDate()}/{item.timeend.getMonth() + 1}</Text>
       )}
       <Button title="Borrar" color="#f44336" onPress={() => borrarTodo(index)} />
     </View>
@@ -150,5 +149,6 @@ const styles = StyleSheet.create({
   completedTime: {
     fontSize: 12,
     color: 'grey',
+    marginTop: 5,
   },
 });
